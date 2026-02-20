@@ -87,24 +87,24 @@ ffmpeg --version
 
 ### 3) Install Python deps
 
-⚠️ Dependency pin: The Coqui TTS repo is unmaintain for 2 years (as of 2026) and no longer compatible with the latest `pytorch` and `transformers`. explicitly notes they maintain a fork available via pip install coqui-tts for better compatibility with newer stacks. Coqui TTS / XTTS may break with transformers>=4.57 due to a removed top-level export (BeamSearchScorer).
-This repo pins Transformers to a compatible version.
+`pip install -r requirement.txt`
 
-`pip install --upgrade "TTS" "transformers<5.0.0" "pydub"`
 ## Quick start
 
 ### 1) Prepare files (same folder as the notebook)
 
-Put in the notebook directory:
+Put input files in the notebook directory, e.g.
 
-- `voice_sample.mp3` (reference voice)
-- `book.txt` (input text)
+- `voice_sample1.mp3`, `voice_sample2.mp3`, etc. (in `voices` folder)
+- `book1.txt`, `book2.txt`, `chapter1.txt`, `chapter2.txt`, etc. (in `texts` folder)
 
 ### 2) Run the notebook
 
 ```bash
 jupyter notebook voice_extract.ipynb
 ```
+
+The output audio book should appear in `audios` folder.
 
 ### 3) Configure inputs/outputs in the notebook
 
@@ -180,12 +180,13 @@ If output is too quiet/loud:
 
 ## Troubleshooting
 
-### Error: `ImportError: cannot import name 'BeamSearchScorer' from 'transformers'`
-Fix by pinning transformers (then restart the notebook kernel):
+### ⚠️ Dependency pin: The Coqui TTS old repo is unmaintain for 2 years (as of 2026) and no longer compatible with the latest pytorch and transformers. Fortunately, community maintain a fork available via `pip install coqui-tts` for better compatibility with newer stacks.
+
+However, coqui-ai-TTS / XTTS may break with transformers>5.0.0 due to a removed top-level export (BeamSearchScorer).
 
 ```bash
 pip uninstall -y transformers
-pip install "transformers<4.57"
+pip install "transformers=5.0.0"
 ```
 
 ### FFmpeg not found / MP3 read-write fails
