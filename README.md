@@ -222,3 +222,4 @@ If you use XTTS in academic work, cite the XTTS paper:
 ## License
 
 `Mozilla Public License Version 2.0.`
+`Coqui Public Model License 1.0.0`
